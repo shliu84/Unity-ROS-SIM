@@ -37,15 +37,21 @@ namespace RosSharp.RosBridgeClient
         protected override void ReceiveMessage(Messages.Geometry.Twist message)
         {
             Debug.Log("Message received");
-            linearVelocity = ToVector3(message.linear).Ros2Unity();
-            angularVelocity = -ToVector3(message.angular).Ros2Unity();
+            linearVelocity = linearVelocityToVector3(message.linear).Ros2Unity();
+            angularVelocity = -angularVelocityToVector3(message.angular).Ros2Unity();
             isMessageReceived = true;
         }
 
-        private static Vector3 ToVector3(Messages.Geometry.Vector3 geometryVector3)
+        private static Vector3 linearVelocityToVector3(Messages.Geometry.Vector3 geometryVector3)
         {
-            return new Vector3(geometryVector3.z, -geometryVector3.x, geometryVector3.y);
+            return new Vector3(geometryVector3.x, -geometryVector3.y, geometryVector3.z);
         }
+
+         private static Vector3 angularVelocityToVector3(Messages.Geometry.Vector3 geometryVector3)
+        {
+            return new Vector3(geometryVector3.z, geometryVector3.y, -geometryVector3.x);
+        }
+
 
         private void FixedUpdate()
         {
