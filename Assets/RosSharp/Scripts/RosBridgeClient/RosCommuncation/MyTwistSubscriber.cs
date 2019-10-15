@@ -21,7 +21,6 @@ namespace RosSharp.RosBridgeClient
 {
     public class MyTwistSubscriber : Subscriber<Messages.Geometry.Twist>
     {
-        private float previousRealTime;
         private Vector3 linearVelocity;
         private Vector3 angularVelocity;
         private bool isMessageReceived;
@@ -36,20 +35,20 @@ namespace RosSharp.RosBridgeClient
 
         protected override void ReceiveMessage(Messages.Geometry.Twist message)
         {
-            Debug.Log("Message received");
+            // Debug.Log("Message received");
             linearVelocity = linearVelocityToVector3(message.linear).Ros2Unity();
-            angularVelocity = -angularVelocityToVector3(message.angular).Ros2Unity();
+            angularVelocity = angularVelocityToVector3(message.angular).Ros2Unity();
             isMessageReceived = true;
         }
 
         private static Vector3 linearVelocityToVector3(Messages.Geometry.Vector3 geometryVector3)
         {
-            return new Vector3(geometryVector3.x, -geometryVector3.y, geometryVector3.z);
+            return new Vector3(geometryVector3.y, -geometryVector3.x, 0);
         }
 
          private static Vector3 angularVelocityToVector3(Messages.Geometry.Vector3 geometryVector3)
         {
-            return new Vector3(geometryVector3.z, geometryVector3.y, -geometryVector3.x);
+            return new Vector3(0, 0, -geometryVector3.z);
         }
 
 
@@ -60,7 +59,7 @@ namespace RosSharp.RosBridgeClient
         }
         private void ProcessMessage()
         {
-            SubscribedRigidbody.velocity = linearVelocity*10;
+            SubscribedRigidbody.velocity = linearVelocity;
             SubscribedRigidbody.angularVelocity = angularVelocity;
 
             isMessageReceived = false;
