@@ -24,6 +24,9 @@ rostopic echo /r1/scan
 
 roslaunch roborts_bringup unity_navigation.launch
 
+rosrun rqt_tf_tree rqt_tf_tree 
+rosrun rqt_graph rqt_graph
+
 
 catkin_create_pkg my_tf tf roscpp rospy nav_msgs
 rosrun my_tf odom_listener

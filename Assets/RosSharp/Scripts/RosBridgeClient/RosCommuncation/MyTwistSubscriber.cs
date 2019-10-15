@@ -19,7 +19,7 @@ limitations under the License.
 using UnityEngine;
 namespace RosSharp.RosBridgeClient
 {
-    public class MyTwistSubscriber : Subscriber<Messages.Geometry.Twist>
+    public class MyTwistSubscriber : UnitySubscriber<MessageTypes.Geometry.Twist>
     {
         private Vector3 linearVelocity;
         private Vector3 angularVelocity;
@@ -33,7 +33,7 @@ namespace RosSharp.RosBridgeClient
             base.Start();
         }
 
-        protected override void ReceiveMessage(Messages.Geometry.Twist message)
+        protected override void ReceiveMessage(MessageTypes.Geometry.Twist message)
         {
             // Debug.Log("Message received");
             linearVelocity = linearVelocityToVector3(message.linear).Ros2Unity();
@@ -41,14 +41,14 @@ namespace RosSharp.RosBridgeClient
             isMessageReceived = true;
         }
 
-        private static Vector3 linearVelocityToVector3(Messages.Geometry.Vector3 geometryVector3)
+        private static Vector3 linearVelocityToVector3(MessageTypes.Geometry.Vector3 geometryVector3)
         {
-            return new Vector3(geometryVector3.y, -geometryVector3.x, 0);
+            return new Vector3((float)geometryVector3.y, -(float)geometryVector3.x, 0);
         }
 
-         private static Vector3 angularVelocityToVector3(Messages.Geometry.Vector3 geometryVector3)
+         private static Vector3 angularVelocityToVector3(MessageTypes.Geometry.Vector3 geometryVector3)
         {
-            return new Vector3(0, 0, -geometryVector3.z);
+            return new Vector3(0, 0, -(float)geometryVector3.z);
         }
 
 

@@ -247,18 +247,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c87b3c7b7739511498b2993d8daf6c51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &46047661 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2461253332485587178, guid: feac18d5553065028bd40e86a107f23c,
-    type: 3}
-  m_PrefabInstance: {fileID: 2461253332529996103}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 46047657}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c05e6dc042e752e3ab70f1e1990c7475, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &46047662
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1327,12 +1315,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!4 &921672825 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2461253333682339171, guid: feac18d5553065028bd40e86a107f23c,
-    type: 3}
-  m_PrefabInstance: {fileID: 2461253332529996103}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -1431,11 +1413,6 @@ GameObject:
   - component: {fileID: 1100095065}
   - component: {fileID: 1100095066}
   - component: {fileID: 1100095067}
-  - component: {fileID: 1100095068}
-  - component: {fileID: 1100095069}
-  - component: {fileID: 1100095070}
-  - component: {fileID: 1100095071}
-  - component: {fileID: 1100095072}
   m_Layer: 0
   m_Name: ROSConnector
   m_TagString: Untagged
@@ -1488,9 +1465,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff98778ae051cfd40a6e4effdf851ebd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Timeout: 10
+  SecondsTimeout: 10
   Serializer: 0
-  Protocol: 0
+  protocol: 0
   RosBridgeServerUrl: ws://127.0.0.1:9090
 --- !u!4 &1100095064
 Transform:
@@ -1528,14 +1505,15 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1100095060}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77b583b0a99e6bfd2bd7fc3abc6e5a13, type: 3}
+  m_Script: {fileID: 11500000, guid: 1051294cfbb4cd4adb7cef621b5cbc4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Topic: /scan
-  TimeStep: 0
-  laserScanWriter: {fileID: 46047661}
+  Topic: /tf
+  FrameId: odom
+  ChildFrameId: base_link
+  SubscribedRigidbody: {fileID: 2077482021}
 --- !u!114 &1100095067
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1545,85 +1523,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1100095060}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 938611d5f671cfe4f9be87c66d865ae1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Topic: /scan
-  laserScanReader: {fileID: 46047659}
-  FrameId: base_laser_link
---- !u!114 &1100095068
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1100095060}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6cd27ba95adab14d85c327244d65eb0, type: 3}
+  m_Script: {fileID: 11500000, guid: 7e403b9d65cacee8fb72794ed8ee1111, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Topic: /odom
-  TimeStep: 0
-  PublishedTransform: {fileID: 921672825}
---- !u!114 &1100095069
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1100095060}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa23b622c60c13f48bdfa74b2e974f20, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Topic: /odom
-  PublishedTransform: {fileID: 921672825}
-  FrameId: odom
---- !u!114 &1100095070
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1100095060}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57574a16cdc8b64408e42846c7ae13fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Topic: 
-  TimeStep: 0
-  PublishedTransform: {fileID: 0}
---- !u!114 &1100095071
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1100095060}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 606c7a0f1a4d07d4a8d2259a5a5bcfe4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Topic: /my_vel
-  PublishedTransform: {fileID: 921672825}
---- !u!114 &1100095072
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1100095060}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c87555f9e29a47b7af4765ae8466e7a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Topic: /my_vel
   SubscribedRigidbody: {fileID: 2077482021}
+  FrameId: odom
+  ChildFrameId: base_link
 --- !u!1 &1513312248
 GameObject:
   m_ObjectHideFlags: 0
@@ -1938,11 +1844,6 @@ PrefabInstance:
       propertyPath: range_max
       value: 8
       objectReference: {fileID: 0}
-    - target: {fileID: 2461253332485587178, guid: feac18d5553065028bd40e86a107f23c,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2461253333682339171, guid: feac18d5553065028bd40e86a107f23c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2018,10 +1919,16 @@ PrefabInstance:
       propertyPath: near clip plane
       value: 0.01
       objectReference: {fileID: 0}
+    - target: {fileID: 2461253332485587178, guid: feac18d5553065028bd40e86a107f23c,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2461253334064407346, guid: feac18d5553065028bd40e86a107f23c,
         type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2461253332485587178, guid: feac18d5553065028bd40e86a107f23c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: feac18d5553065028bd40e86a107f23c, type: 3}

@@ -17,19 +17,19 @@ using UnityEngine;
 
 namespace RosSharp.RosBridgeClient
 {
-    public class MyOdometryPublisher : Publisher<Messages.Navigation.Odometry>
+    public class MyOdometryPublisher : UnityPublisher<MessageTypes.Nav.Odometry>
     {
         // public Transform PublishedTransform;
         public Rigidbody SubscribedRigidbody;
         public string FrameId = "odom";
         public string ChildFrameId = "base_link";
 
-        private Messages.Navigation.Odometry message;
+        private MessageTypes.Nav.Odometry message;
         // private Vector3 position;
         // private Quaternion rotation;
 
-        // private Messages.Geometry.PoseWithCovariance pose;
-        // private Messages.Geometry.TwistWithCovariance twist;
+        // private MessageTypes.Geometry.PoseWithCovariance pose;
+        // private MessageTypes.Geometry.TwistWithCovariance twist;
 
 
         protected override void Start()
@@ -45,7 +45,7 @@ namespace RosSharp.RosBridgeClient
 
         private void InitializeMessage()
         {
-            message = new Messages.Navigation.Odometry();
+            message = new MessageTypes.Nav.Odometry();
             message.header.frame_id = FrameId;
             message.child_frame_id = ChildFrameId;
         }
@@ -61,36 +61,36 @@ namespace RosSharp.RosBridgeClient
             
             Publish(message);
         }
-        private static Messages.Geometry.Vector3 linearVelocityToGeometryVector3(Vector3 vector3)
+        private static MessageTypes.Geometry.Vector3 linearVelocityToGeometryVector3(Vector3 vector3)
         {
-            Messages.Geometry.Vector3 geometryVector3 = new Messages.Geometry.Vector3();
+            MessageTypes.Geometry.Vector3 geometryVector3 = new MessageTypes.Geometry.Vector3();
             geometryVector3.x = vector3.x;
             geometryVector3.y = vector3.z;
             geometryVector3.z = 0;
             return geometryVector3;
         }
 
-         private static Messages.Geometry.Vector3 angularVelocityToGeometryVector3(Vector3 vector3)
+         private static MessageTypes.Geometry.Vector3 angularVelocityToGeometryVector3(Vector3 vector3)
         {
-            Messages.Geometry.Vector3 geometryVector3 = new Messages.Geometry.Vector3();
+            MessageTypes.Geometry.Vector3 geometryVector3 = new MessageTypes.Geometry.Vector3();
             geometryVector3.x = 0;
             geometryVector3.y = 0;
             geometryVector3.z = -vector3.z;
             return geometryVector3;
         }
 
-        private Messages.Geometry.Point GetGeometryPoint(Vector3 position)
+        private MessageTypes.Geometry.Point GetGeometryPoint(Vector3 position)
         {
-            Messages.Geometry.Point geometryPoint = new Messages.Geometry.Point();
+            MessageTypes.Geometry.Point geometryPoint = new MessageTypes.Geometry.Point();
             geometryPoint.x = position.x;
             geometryPoint.y = -position.y;
             geometryPoint.z = position.z;
             return geometryPoint;
         }
 
-        private Messages.Geometry.Quaternion GetGeometryQuaternion(Quaternion quaternion)
+        private MessageTypes.Geometry.Quaternion GetGeometryQuaternion(Quaternion quaternion)
         {
-            Messages.Geometry.Quaternion geometryQuaternion = new Messages.Geometry.Quaternion();
+            MessageTypes.Geometry.Quaternion geometryQuaternion = new MessageTypes.Geometry.Quaternion();
             geometryQuaternion.x = quaternion.x;
             geometryQuaternion.y = -quaternion.y;
             geometryQuaternion.z = quaternion.z;
@@ -98,7 +98,7 @@ namespace RosSharp.RosBridgeClient
             return geometryQuaternion;
         }
 
-        // protected override void ReceiveMessage(Messages.Navigation.Odometry message)
+        // protected override void ReceiveMessage(MessageTypes.Nav.Odometry message)
         // {
         //     position = GetPosition(message).Ros2Unity();
         //     rotation = GetRotation(message).Ros2Unity();
@@ -110,7 +110,7 @@ namespace RosSharp.RosBridgeClient
         //     PublishedTransform.rotation = rotation;
         // }
 
-        // private Vector3 GetPosition(Messages.Navigation.Odometry message)
+        // private Vector3 GetPosition(MessageTypes.Nav.Odometry message)
         // {
         //     return new Vector3(
         //         message.pose.pose.position.x,
@@ -118,7 +118,7 @@ namespace RosSharp.RosBridgeClient
         //         message.pose.pose.position.z);
         // }
 
-        // private Quaternion GetRotation(Messages.Navigation.Odometry message)
+        // private Quaternion GetRotation(MessageTypes.Nav.Odometry message)
         // {
         //     return new Quaternion(
         //         message.pose.pose.orientation.x,

@@ -17,13 +17,13 @@ using UnityEngine;
 
 namespace RosSharp.RosBridgeClient
 {
-    public class MyTwistPublisher : Publisher<Messages.Geometry.Twist>
+    public class MyTwistPublisher : UnityPublisher<MessageTypes.Geometry.Twist>
     {
         private Vector3 linearVelocity;
         private Vector3 angularVelocity;
         public Rigidbody SubscribedRigidbody;
 
-        private Messages.Geometry.Twist message;
+        private MessageTypes.Geometry.Twist message;
 
         protected override void Start()
         {
@@ -38,9 +38,9 @@ namespace RosSharp.RosBridgeClient
 
         private void InitializeMessage()
         {
-            message = new Messages.Geometry.Twist();
-            message.linear = new Messages.Geometry.Vector3();
-            message.angular = new Messages.Geometry.Vector3();
+            message = new MessageTypes.Geometry.Twist();
+            message.linear = new MessageTypes.Geometry.Vector3();
+            message.angular = new MessageTypes.Geometry.Vector3();
         }
         private void UpdateMessage()
         {
@@ -49,18 +49,18 @@ namespace RosSharp.RosBridgeClient
             Publish(message);
         }
 
-        private static Messages.Geometry.Vector3 linearVelocityToGeometryVector3(Vector3 vector3)
+        private static MessageTypes.Geometry.Vector3 linearVelocityToGeometryVector3(Vector3 vector3)
         {
-            Messages.Geometry.Vector3 geometryVector3 = new Messages.Geometry.Vector3();
+            MessageTypes.Geometry.Vector3 geometryVector3 = new MessageTypes.Geometry.Vector3();
             geometryVector3.x = vector3.x;
             geometryVector3.y = vector3.z;
             geometryVector3.z = 0;
             return geometryVector3;
         }
 
-         private static Messages.Geometry.Vector3 angularVelocityToGeometryVector3(Vector3 vector3)
+         private static MessageTypes.Geometry.Vector3 angularVelocityToGeometryVector3(Vector3 vector3)
         {
-            Messages.Geometry.Vector3 geometryVector3 = new Messages.Geometry.Vector3();
+            MessageTypes.Geometry.Vector3 geometryVector3 = new MessageTypes.Geometry.Vector3();
             geometryVector3.x = 0;
             geometryVector3.y = 0;
             geometryVector3.z = -vector3.z;
