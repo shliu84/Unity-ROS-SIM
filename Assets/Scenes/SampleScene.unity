@@ -1443,8 +1443,6 @@ GameObject:
   - component: {fileID: 1100095066}
   - component: {fileID: 1100095068}
   - component: {fileID: 1100095069}
-  - component: {fileID: 1100095061}
-  - component: {fileID: 1100095067}
   m_Layer: 0
   m_Name: ROSConnector
   m_TagString: Untagged
@@ -1452,21 +1450,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1100095061
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1100095060}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90bc7387fac03686d8d73f27cd49859d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Topic: /cmd_vel
-  TimeStep: 0
-  SubscribedRigidbody: {fileID: 2077482021}
 --- !u!114 &1100095062
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1547,22 +1530,6 @@ MonoBehaviour:
   ChildFrameId: base_link
   SubscribedTransform: {fileID: 1816205651}
   InitTransform: {fileID: 959106515}
---- !u!114 &1100095067
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1100095060}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e403b9d65cacee8fb72794ed8ee1111, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Topic: /odom
-  SubscribedRigidbody: {fileID: 2077482021}
-  FrameId: odom
-  ChildFrameId: base_link
 --- !u!114 &1100095068
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1857,12 +1824,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &2077482021 stripped
-Rigidbody:
-  m_CorrespondingSourceObject: {fileID: 2461253333682339170, guid: feac18d5553065028bd40e86a107f23c,
-    type: 3}
-  m_PrefabInstance: {fileID: 2461253332529996103}
-  m_PrefabAsset: {fileID: 0}
 --- !u!20 &2092805340 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 2461253333794409883, guid: feac18d5553065028bd40e86a107f23c,

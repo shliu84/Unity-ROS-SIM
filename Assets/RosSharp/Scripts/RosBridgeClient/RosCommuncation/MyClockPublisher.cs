@@ -1,13 +1,14 @@
-//http://wiki.ros.org/navigation/Tutorials/RobotSetup/Odom
+
 
 using UnityEngine;
 
 namespace RosSharp.RosBridgeClient
 {
-    public class MyClockPublisher : UnityPublisher<MessageTypes.Std.Time>{
+    public class MyClockPublisher : UnityPublisher<MessageTypes.Rosgraph.Clock>{
         private MessageTypes.Std.Time stamp;
 
-        // private MessageTypes.Rosgraph.Clock clock;
+        private MessageTypes.Rosgraph.Clock clock;
+
         protected override void Start()
         {
             base.Start();
@@ -20,9 +21,9 @@ namespace RosSharp.RosBridgeClient
         }
         private void InitializeMessage()
         {
-            // clock = new MessageTypes.Rosgraph.Clock();
-
+            clock = new MessageTypes.Rosgraph.Clock();
             stamp = new MessageTypes.Std.Time();
+
             // Debug.Log(stamp);
         }
         private void UpdateMessage()
@@ -30,8 +31,8 @@ namespace RosSharp.RosBridgeClient
             float time = Time.realtimeSinceStartup;
             stamp.secs = (uint)time;
             stamp.nsecs = (uint)(1e9 * (time - stamp.secs));
-            
-            Publish(stamp.ToString());
+            clock.clock = stamp;
+            Publish(clock);
             
         }
     }
