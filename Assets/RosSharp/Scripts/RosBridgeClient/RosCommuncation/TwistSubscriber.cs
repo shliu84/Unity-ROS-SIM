@@ -16,6 +16,8 @@ limitations under the License.
 // Adjustments to new Publication Timing and Execution Framework
 // © Siemens AG, 2018, Dr. Martin Bischoff (martin.bischoff@siemens.com)
 
+//sihan liu
+
 using UnityEngine;
 
 namespace RosSharp.RosBridgeClient
@@ -43,24 +45,28 @@ namespace RosSharp.RosBridgeClient
 
         private static Vector3 ToVector3(MessageTypes.Geometry.Vector3 geometryVector3)
         {
+            // return new Vector3((float)geometryVector3.x, (float)geometryVector3.y, (float)geometryVector3.z);
             return new Vector3((float)geometryVector3.x, (float)geometryVector3.y, (float)geometryVector3.z);
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             if (isMessageReceived)
                 ProcessMessage();
+            previousRealTime = Time.realtimeSinceStartup;
         }
         private void ProcessMessage()
         {
             float deltaTime = Time.realtimeSinceStartup - previousRealTime;
 
             SubscribedTransform.Translate(linearVelocity * deltaTime);
-            SubscribedTransform.Rotate(Vector3.forward, angularVelocity.x * deltaTime);
-            SubscribedTransform.Rotate(Vector3.up, angularVelocity.y * deltaTime);
-            SubscribedTransform.Rotate(Vector3.left, angularVelocity.z * deltaTime);
+            // SubscribedTransform.Rotate(Vector3.forward, angularVelocity.x * deltaTime*180/3.14f);
+            // SubscribedTransform.Rotate(Vector3.up, angularVelocity.y * deltaTime*180/3.14f);
+            SubscribedTransform.Rotate(0, angularVelocity.y * deltaTime*180/3.14f, 0);
 
-            previousRealTime = Time.realtimeSinceStartup;
+            Debug.Log(angularVelocity.y);
+
+            // previousRealTime = Time.realtimeSinceStartup;
 
             isMessageReceived = false;
         }

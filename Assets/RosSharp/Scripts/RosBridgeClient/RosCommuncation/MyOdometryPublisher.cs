@@ -24,6 +24,11 @@ namespace RosSharp.RosBridgeClient
         public string FrameId = "odom";
         public string ChildFrameId = "base_link";
 
+        private float x = 0.0f;
+        private float y = 0.0f;
+        private float th = 0.0f;
+        private float previousRealTime;
+
         private MessageTypes.Nav.Odometry message;
         // private Vector3 position;
         // private Quaternion rotation;
@@ -52,14 +57,56 @@ namespace RosSharp.RosBridgeClient
 
         private void UpdateMessage()
         {
+            float vx = SubscribedRigidbody.velocity.x;
+            float vy = SubscribedRigidbody.velocity.z;
+            float vth = -SubscribedRigidbody.angularVelocity.y;
+            // Debug.Log(SubscribedRigidbody.angularVelocity);
+
+            float dt = Time.realtimeSinceStartup - previousRealTime;//tosec??
+            
+            float delta_x = (vx * Mathf.Cos(th) - vy * Mathf.Sin(th)) * dt;
+            float delta_y = (vx * Mathf.Sin(th) + vy * Mathf.Cos(th)) * dt;
+            float delta_th = vth * dt;
+
+            x += delta_x;
+            y += delta_y;
+            th += delta_th;
+
+            previousRealTime = Time.realtimeSinceStartup;
+            
+
+            createQuaternionMsgFromYaw(th);
+            
             message.header.Update();
-            message.pose.pose.position = GetGeometryPoint(SubscribedRigidbody.position.Unity2Ros());
-            message.pose.pose.orientation = GetGeometryQuaternion(SubscribedRigidbody.rotation.Unity2Ros());
+            message.pose.pose.position = createPosition(x,y,0);
+            message.pose.pose.orientation = createQuaternionMsgFromYaw(th);;
 
             message.twist.twist.linear = linearVelocityToGeometryVector3(SubscribedRigidbody.velocity);
             message.twist.twist.angular = angularVelocityToGeometryVector3(SubscribedRigidbody.angularVelocity);  
             
             Publish(message);
+        }
+
+        private MessageTypes.Geometry.Point createPosition(float x,float y,float z)
+        {
+            MessageTypes.Geometry.Point v3 = new MessageTypes.Geometry.Point();
+            v3.x = x;//x;
+            v3.y = y;//y;
+            v3.z = 0;//z;
+            // Debug.Log(v3);
+            return v3;
+        }
+
+        private MessageTypes.Geometry.Quaternion createQuaternionMsgFromYaw(float th){
+            Quaternion odom_quat = Quaternion.Euler(0, th*180/Mathf.PI, 0);
+            // Debug.Log(odom_quat);
+            MessageTypes.Geometry.Quaternion q = new MessageTypes.Geometry.Quaternion();
+            q.x = 0;
+            q.y = 0;
+            q.z = odom_quat.y;
+            q.w = odom_quat.w;
+            // Debug.Log(q);
+            return q;   
         }
         private static MessageTypes.Geometry.Vector3 linearVelocityToGeometryVector3(Vector3 vector3)
         {
