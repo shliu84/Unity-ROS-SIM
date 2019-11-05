@@ -46,3 +46,9 @@ roslaunch roborts_bringup unity_navigation.launch
 ```
 5. Set the initial pose in Rriz
 6. Test navigation
+
+### Third Party Libraries
++ ROS#  <https://github.com/siemens/ros-sharp>
++ RoboRTS-v2 <https://github.com/guanghuhappysf128/RoboRTS-v2.git>
++ roborts_gazebo <https://github.com/guanghuhappysf128/roborts_gazebo.git>
++ RoboRTS_Sim <https://github.com/XinZhangk/RoboRTS_Sim.git>
