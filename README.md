@@ -10,7 +10,7 @@ Download Unity for ubuntu <https://forum.unity.com/threads/unity-hub-v2-0-0-rele
 sudo apt-get install ros-kinetic-rosbridge-suite
 ```
 ### Configuration
-These files are in RoboRTS_Config dolder
+These files are in RoboRTS_Config folder
 1. add decision.prototxt to 
 
 ```
