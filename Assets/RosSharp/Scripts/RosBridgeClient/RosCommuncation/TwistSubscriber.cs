@@ -16,7 +16,7 @@ limitations under the License.
 // Adjustments to new Publication Timing and Execution Framework
 // © Siemens AG, 2018, Dr. Martin Bischoff (martin.bischoff@siemens.com)
 
-//sihan liu
+//Sihan Liu
 
 using UnityEngine;
 
@@ -64,7 +64,7 @@ namespace RosSharp.RosBridgeClient
             // SubscribedTransform.Rotate(Vector3.up, angularVelocity.y * deltaTime*180/3.14f);
             SubscribedTransform.Rotate(0, angularVelocity.y * deltaTime*180/3.14f, 0);
 
-            Debug.Log(angularVelocity.y);
+            // Debug.Log(angularVelocity.y);
 
             // previousRealTime = Time.realtimeSinceStartup;
 

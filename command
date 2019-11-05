@@ -18,7 +18,7 @@ angular:
   z: 0.0" 
 
 
-source ~/ws/devel/setup.bash
+source ~/ws_2/devel/setup.bash
 roslaunch roborts_bringup navigation_testing_with_simulation.launch gui:=true
 rostopic echo /r1/scan 
 
@@ -30,5 +30,7 @@ rosrun rqt_graph rqt_graph
 
 catkin_create_pkg my_tf tf roscpp rospy nav_msgs
 rosrun my_tf odom_listener
+
+
 
 
