@@ -1,6 +1,6 @@
 # Unity_ROS_SIM
 ### Demo
-https://www.youtube.com/watch?v=0bVDirUqv3w&ab_channel=SihanLiu
+https://www.youtube.com/watch?v=0bVDirUqv3w
 
 ## Installation and Configuration
 ### Install Unity
